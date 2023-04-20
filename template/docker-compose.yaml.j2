@@ -1,0 +1,21 @@
+---
+version: "3.8"
+services:
+  {{cluster_name}}-{{port}}:
+    container_name: {{cluster_name}}-{{port}}
+    image: {{image}}
+    restart: unless-stopped
+    network_mode: "host"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+      - /data/services/{{cluster_name}}-{{port}}/base:/data/services/{{cluster_name}}-{{port}}/base
+      - /data/services/{{cluster_name}}-{{port}}/data:/data/services/{{cluster_name}}-{{port}}/data
+      - /data/services/{{cluster_name}}-{{port}}/log:/data/services/{{cluster_name}}-{{port}}/log
+      - /data/services/{{cluster_name}}-{{port}}/binlog:/data/services/{{cluster_name}}-{{port}}/binlog
+      - /data/services/{{cluster_name}}-{{port}}/conf/my.cnf:/etc/mysql/my.cnf
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G

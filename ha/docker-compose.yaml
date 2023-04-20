@@ -1,0 +1,39 @@
+---
+version: "3.8"
+services:
+  mysql-6300:
+    container_name: mysql-6300
+    image: mysql:5.7
+    restart: unless-stopped
+    network_mode: "host"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+      - /data/services/mysql-6300/base:/data/services/mysql-6300/base
+      - /data/services/mysql-6300/data:/data/services/mysql-6300/data
+      - /data/services/mysql-6300/log:/data/services/mysql-6300/log
+      - /data/services/mysql-6300/binlog:/data/services/mysql-6300/binlog
+      - /data/services/mysql-6300/conf/my.cnf:/etc/mysql/my.cnf
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+  mysql-6301:
+    container_name: mysql-6301
+    image: mysql:5.7
+    restart: unless-stopped
+    network_mode: "host"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+      - /data/services/mysql-6301/base:/data/services/mysql-6301/base
+      - /data/services/mysql-6301/data:/data/services/mysql-6301/data
+      - /data/services/mysql-6301/log:/data/services/mysql-6301/log
+      - /data/services/mysql-6301/binlog:/data/services/mysql-6301/binlog
+      - /data/services/mysql-6301/conf/my.cnf:/etc/mysql/my.cnf
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
